@@ -12,15 +12,9 @@ catch(PDOException $e)
     echo $e->getMessage();
 }
 
+//read the JSON file
 $json = file_get_contents("C:\Users\smjon\Documents\Test.json");
-$data = json_encode(json_decode($json), JSON_PRETTY_PRINT);
 $sql = $conn -> prepare("insert into Assignment(Assign) values(:d);");
 $sql -> bindValue("d", $data);
 $sql -> execute();
-$sql2 = $conn -> prepare("select * from Assignment");
-$sql2 -> execute();
-$result2 = $sql2 -> fetchAll();
-foreach($result2 as $r2){
-    echo $r2["ID"] . $r2["Assign"] . "<br>";
-}
 ?>
