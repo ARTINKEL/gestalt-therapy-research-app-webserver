@@ -15,6 +15,6 @@ catch(PDOException $e)
 //read the JSON file
 $json = file_get_contents("C:\Users\smjon\Documents\Test.json");
 $sql = $conn -> prepare("insert into Assignment(Assign) values(:d);");
-$sql -> bindValue("d", $data);
+$sql -> bindValue("d", $json);
 $sql -> execute();
 ?>
