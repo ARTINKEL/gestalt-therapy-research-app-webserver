@@ -2,9 +2,9 @@
  
 // Importing DBConfig.php file.
 include 'DBConfig.php';
- 
+
 // Creating connection.
- $con = mysqli_connect($HostName,$HostUser,$HostPass,$DatabaseName);
+ $con = new mysqli($HostName,$HostUser,$HostPass,$DatabaseName);
  
  // Check connection
  if ($con->connect_error){
@@ -19,30 +19,38 @@ include 'DBConfig.php';
 
 // Populate User email from JSON $obj array and store into $email.
 $id = $obj['id'];
- 
+//$id = '123';
+
 // Populate Password from JSON $obj array and store into $password.
 $password = $obj['password'];
+//$password = '123';
 
 //Applying User Login query with email and password match.
-$Sql_Query = "select * from user where id = '$id' and password = '$password' ";
+$Sql_Query = "select Admin from user where id = '$id' and password = '$password' ";
 
 // Executing SQL Query.
 $check = mysqli_fetch_array(mysqli_query($con,$Sql_Query));
-
+$result = $con->query($Sql_Query);
 
 if(isset($check)){
+ 
+ while($row = $result->fetch_assoc()) {
+     $admin = $row['Admin'];
+ }
 
- $SuccessLoginMsg = 'Data Matched';
+ $DataArray = array('response' => 'data_matched', 'admin' => $admin);
+
+ //$SuccessLoginMsg = 'Data Matched';
  
  // Converting the message into JSON format.
-$SuccessLoginJson = json_encode($SuccessLoginMsg);
+ $SuccessLoginJson = json_encode($DataArray);
  
 // Echo the message.
  echo $SuccessLoginJson ; 
 
  }
  
- else{
+ else {
  
  // If the record inserted successfully then show the message.
 $InvalidMSG = 'Invalid Username or Password Please Try Again' ;
@@ -55,6 +63,6 @@ $InvalidMSGJSon = json_encode($InvalidMSG);
  
  }
  
- mysqli_close($con);
+ $con->close();
 
 ?>
