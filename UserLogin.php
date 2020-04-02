@@ -17,13 +17,11 @@ include 'DBConfig.php';
  // decoding the received JSON and store into $obj variable.
  $obj = json_decode($json,true);
 
-// Populate User email from JSON $obj array and store into $email.
+// Populate User id from JSON $obj array and store into $id.
 $id = $obj['id'];
-//$id = '123';
 
 // Populate Password from JSON $obj array and store into $password.
 $password = $obj['password'];
-//$password = '123';
 
 //Applying User Login query with email and password match.
 $Sql_Query = "select Admin from user where id = '$id' and password = '$password' ";
