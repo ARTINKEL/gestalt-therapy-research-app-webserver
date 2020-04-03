@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2020 at 01:51 AM
+-- Generation Time: Apr 03, 2020 at 02:11 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.26
 
@@ -21,6 +21,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `gestaltusers`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment`
+--
+
+CREATE TABLE `assignment` (
+  `ID` int(11) NOT NULL,
+  `Assign` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`Assign`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `assignment`
+--
+
+INSERT INTO `assignment` (`ID`, `Assign`) VALUES
+(123, '{\r\n\"Assignment_1\" : {\"Question_1\" : {\r\n   \"Question_Text\" : \"Text\",\r\n   \"Option_1\" : \"Option Text\",\r\n   \"Option_2\" : \"Option Text\"\r\n   },\r\n\"Question_2\" : {\r\n   \"Question_Text\" : \"Text\"\r\n}\r\n},\r\n\"Assignment_2\" : {\"Question_1\" : {\r\n   \"Question_Text\" : \"Text\",\r\n   \"Option_1\" : \"Option Text\",\r\n   \"Option_2\" : \"Option Text\"\r\n   },\r\n\"Question_2\" : {\r\n   \"Question_Text\" : \"Text\"\r\n}\r\n}\r\n}'),
+(666, '{\r\n\"Assignment_A\" : {\"Question_1\" : {\r\n   \"Question_Text\" : \"Text\",\r\n   \"Option_1\" : \"Option Text\",\r\n   \"Option_2\" : \"Option Text\"\r\n   },\r\n\"Question_2\" : {\r\n   \"Question_Text\" : \"Text\"\r\n}\r\n},\r\n\"Assignment_B\" : {\"Question_1\" : {\r\n   \"Question_Text\" : \"Text\",\r\n   \"Option_1\" : \"Option Text\",\r\n   \"Option_2\" : \"Option Text\"\r\n   },\r\n\"Question_2\" : {\r\n   \"Question_Text\" : \"Text\"\r\n}\r\n}\r\n}');
 
 -- --------------------------------------------------------
 
@@ -49,11 +68,27 @@ INSERT INTO `user` (`ID`, `Password`, `Admin`, `AssignmentData`) VALUES
 --
 
 --
+-- Indexes for table `assignment`
+--
+ALTER TABLE `assignment`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `AssignmentData` (`AssignmentData`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `assignment`
+--
+ALTER TABLE `assignment`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=667;
 
 --
 -- Constraints for dumped tables
