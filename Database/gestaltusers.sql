@@ -24,6 +24,10 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+drop database if exists gestaltusers;
+create database gestaltusers;
+use gestaltusers;
+
 --
 -- Table structure for table `assignment`
 --
